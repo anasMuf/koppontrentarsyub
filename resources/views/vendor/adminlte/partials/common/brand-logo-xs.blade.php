@@ -19,7 +19,7 @@
     @endif>
 
     {{-- Small brand logo --}}
-    <img src="{{ $logo == '' ? asset(config('adminlte.logo_img')) : asset('storage/images/logos/'.$logo) }}"
+    <img src="{{ $logo == '' ? asset(config('adminlte.logo_img')) : asset('dist/images/logos/'.$logo) }}"
          alt="{{ $logo == '' ? asset(config('adminlte.logo_img_alt')) : $nama.' Logo' }}"
          class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}"
          style="opacity:.8">

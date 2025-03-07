@@ -132,7 +132,7 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img src="{{ $logo == '' ? asset(config('adminlte.logo_img')) : asset('storage/images/logos/'.$logo) }}" alt="{{ $logo == '' ? asset(config('adminlte.logo_img_alt')) : $nama.' Logo' }}">
+            <img src="{{ $logo == '' ? asset(config('adminlte.logo_img')) : asset('dist/images/logos/'.$logo) }}" alt="{{ $logo == '' ? asset(config('adminlte.logo_img_alt')) : $nama.' Logo' }}">
         </div>
         <div class="description">
             <h3>{{ $nama == '' ? asset(config('adminlte.logo')) : $nama }}</h3>

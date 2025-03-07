@@ -50,7 +50,7 @@
 {{-- Add common Javascript/Jquery code --}}
 
 @push('js')
-<script src="{{ asset('dist/css/js/script.js') }}"></script>
+<script src="{{ asset('dist/js/script.js') }}"></script>
 <script>
 
     $(document).ready(function() {

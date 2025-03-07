@@ -53,7 +53,7 @@ class PengaturanController extends Controller
             }
 
             if($item->setting == 'logo' && $item->value){
-                $value = '<img src="'.asset('storage/images/logos/'.$item->value).'" width="50">';
+                $value = '<img src="'.asset('dist/images/logos/'.$item->value).'" width="50">';
             }
 
             $data['config']['data'][] = [
@@ -107,7 +107,13 @@ class PengaturanController extends Controller
 
             if($request->setting == 'logo' && isset($request->value_file) && $request->hasFile('value_file')){
                 $value = time().$request->file('value_file')->getClientOriginalName();
-                $request->file('value_file')->storeAs('public/images/logos', $value);
+                // $request->file('value_file')->storeAs('public/images/logos', $value);
+                if(!move_uploaded_file($request->file('value_file')->getRealPath(),public_path('dist/images/logos/').$value)){
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Gagal upload file, kesalahan pada sistem',
+                    ]);
+                }
             }
 
             Pengaturan::updateOrCreate([
