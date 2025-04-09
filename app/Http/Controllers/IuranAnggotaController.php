@@ -66,11 +66,11 @@ class IuranAnggotaController extends Controller
                 if($item->iuran_anggota){
                     foreach($item->iuran_anggota as $iuran_anggota){
 
-                        if($iuran_anggota->jenis_iuran->jenis_iuran === 'wajib'){
+                        if($iuran_anggota && $iuran_anggota->jenis_iuran && $iuran_anggota->jenis_iuran->jenis_iuran === 'wajib'){
                             $sudahWajib = true;
                         }
 
-                        if(date('Y-m',strtotime($iuran_anggota->periode_iuran)) === date('Y').'-'.$bulan['bulan_angka']){
+                        if($iuran_anggota && date('Y-m',strtotime($iuran_anggota->periode_iuran)) === date('Y').'-'.$bulan['bulan_angka']){
                             $sudahDibayar = true;
                             break;
                         }
