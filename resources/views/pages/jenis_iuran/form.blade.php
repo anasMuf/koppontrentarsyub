@@ -33,9 +33,6 @@
                 selected="{{ $data ? old('jenis_iuran',$data->jenis_iuran) : old('jenis_iuran') }}" empty-option=".:: Pilih Status Pendafatarn ::."/>
             </x-adminlte-select>
             <x-adminlte-input name="nominalFormated" label="Nominal" placeholder="Tulis Nominal" id="nominalFormated" maxLength="20"
-                @if ($data && $data->jenis_iuran == 'sukarela')
-                style="display: none;"
-                @endif
                 fgroup-class="col-md-6" disable-feedback enable-old-support error-key value="{{ $data ? old('nominalFormated',number_format($data->nominal,0,',','.')) : old('nominalFormated') }}"/>
         </div>
         <div class="row">
@@ -72,6 +69,10 @@
             nominalFormated = $('#nominalFormated').val($('#nominalFormated').val().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, "."))
             return nominalFormated
         }
+
+        $(document).ready(function () {
+            $('#nominalFormated').closest('.form-group').hide()
+        });
 
         $('#jenis_iuran').change(function () {
             if($(this).val() == 'sukarela'){
