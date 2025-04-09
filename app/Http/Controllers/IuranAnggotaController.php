@@ -157,8 +157,8 @@ class IuranAnggotaController extends Controller
         }
 
         $data['config1']['data'][] = [
-            strtoupper($jenis_iuran->jenis_iuran),
-            number_format($jenis_iuran->nominal,0,',','.'),
+            $jenis_iuran ? strtoupper($jenis_iuran->jenis_iuran) : '',
+            $jenis_iuran ? number_format($jenis_iuran->nominal,0,',','.') : '',
             $status1,
             '<nobr>'.$btnPaymentDues1.$btnDetails1.'</nobr>'
         ];
