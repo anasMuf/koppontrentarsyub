@@ -104,7 +104,9 @@ class JenisIuranController extends Controller
 
         DB::beginTransaction();
         try {
-            JenisIuran::create([
+            JenisIuran::updateOrCreate([
+                'id_jenis_iuran' => $request->id_jenis_iuran
+            ],[
                 'jenis_iuran' => $request->jenis_iuran,
                 'nominal' => $request->jenis_iuran != 'sukarela' ? $request->nominal : 0,
                 'keterangan' => $request->keterangan,
