@@ -77,10 +77,7 @@ class JenisIuranController extends Controller
             'keterangan' => 'required',
         ];
         if($request->jenis_iuran !== 'sukarela'){
-            $rules[] = [
-                'nominalFormated' => 'required',
-                'nominal' => 'required|integer',
-            ];
+            $rules['nominalFormated'] = 'required';
         }
         $messages = [
             'required' => ':attribute harus diisi',

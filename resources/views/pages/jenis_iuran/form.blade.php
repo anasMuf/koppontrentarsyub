@@ -86,7 +86,7 @@
     <script>
         $('#formData').submit(function (e) {
             e.preventDefault();
-            const data = serializeWithExtra('formData',{nominal: nominalInt})
+            const data = serializeWithExtra('formData',{nominal: parseInt(nominalInt)})
             $.post("{{ route('jenis_iuran.store') }}", data)
             .done(function (response) {
                 if(response.success){
