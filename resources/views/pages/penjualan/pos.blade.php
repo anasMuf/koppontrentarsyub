@@ -24,7 +24,7 @@
                 fgroup-class="col-md-4" disable-feedback enable-old-support error-key value="{{ $data ? old('tgl_pembelian',date('Y-m-d',$data->tgl_pembelian)) : old('tgl_pembelian',date('Y-m-d')) }}"/>
             <x-adminlte-select name="anggota_id" label="Anggota"
                 fgroup-class="col-md-4">
-                <x-adminlte-options :options="$anggota"
+                <x-adminlte-options :options="$anggota" required
                 selected="{{ $data ? old('anggota_id',$data->anggota_id) : old('anggota_id') }}" empty-option=".:: Pilih Anggota ::."/>
             </x-adminlte-select>
         </div>

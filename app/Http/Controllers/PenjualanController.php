@@ -116,7 +116,7 @@ class PenjualanController extends Controller
     public function store(Request $request) {
         $rules = [
             'no_struk' => 'nullable|unique:penjualan,no_struk',
-            // 'anggota_id' => 'required|exists:anggota,id_anggota',
+            'anggota_id' => 'required|exists:anggota,id_anggota',
             'tgl_penjualan' => 'required|date',
             'grand_total' => 'required',
             'items' => 'required|array|min:1',
