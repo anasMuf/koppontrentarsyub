@@ -13,6 +13,7 @@ use App\Models\ProdukVarian;
 use Illuminate\Http\Request;
 use App\Models\PenjualanDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\PenjualanPembayaran;
 use Illuminate\Support\Facades\Validator;
 
 class PenjualanController extends Controller
@@ -29,6 +30,7 @@ class PenjualanController extends Controller
             'Tanggal Penjualan',
             'Total',
             ['label' => 'Status', 'width' => 15],
+            ['label' => 'Pembayaran', 'width' => 15],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
@@ -37,12 +39,13 @@ class PenjualanController extends Controller
         $data['config'] = [
             'data' => [],
             'order' => [[0, 'asc']],
-            'columns' => [null, ['orderable' => false], null, null, null, ['orderable' => false]],
+            'columns' => [null, ['orderable' => false], null, null, null, null, ['orderable' => false]],
         ];
 
         $btnDelete = '';
         $btnDetails = '';
         $status = '';
+        $statusPembayaran = '';
         $no = 1;
 
         foreach($penjualan as $item){
@@ -68,12 +71,19 @@ class PenjualanController extends Controller
                 $status = '<span class="badge badge-light">Proses</span>';
             }
 
+            if($item->status_pembayaran == 'Lunas'){
+                $statusPembayaran = '<span class="badge badge-success">Lunas</span>';
+            }else{
+                $statusPembayaran = '<span class="badge badge-danger">Belum Lunas</span>';
+            }
+
             $data['config']['data'][] = [
                 $no++,
                 $item->no_struk??'-',
                 Carbon::parse($item->tanggal_penjualan)->isoFormat('DD MMMM YYYY'),
                 $format->formatCurrency($item->total_penjualan, 'IDR'),
                 $status,
+                $statusPembayaran,
                 '<nobr>'.$btnDelete.$btnDetails.'</nobr>'
             ];
         }
@@ -109,7 +119,7 @@ class PenjualanController extends Controller
     }
 
     public function form(Request $request){
-        $data['data'] = Penjualan::with(['anggota','penjualan_detail.produk_varian.produk'])->find($request->id);
+        $data['data'] = Penjualan::with(['anggota','penjualan_detail.produk_varian.produk','penjualan_pembayaran'])->find($request->id);
         return view('pages.penjualan.form',$data);
     }
 
@@ -190,6 +200,11 @@ class PenjualanController extends Controller
 
             $penjualan->total_penjualan = $total_penjualan;
             $penjualan->save();
+
+            PenjualanPembayaran::create([
+                'penjualan_id' => $penjualan->id_penjualan,
+                'nominal' => $request->amount_paid,
+            ]);
 
             DB::commit();
             return response()->json([

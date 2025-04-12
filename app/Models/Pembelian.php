@@ -18,6 +18,9 @@ class Pembelian extends Model
     public function pembelian_detail(){
         return $this->hasMany(PembelianDetail::class,'pembelian_id','id_pembelian');
     }
+    public function pembelian_pembayaran(){
+        return $this->hasMany(PembelianPembayaran::class,'pembelian_id','id_pembelian');
+    }
 
     public function supplier(){
         return $this->belongsTo(Supplier::class,'supplier_id','id_supplier');

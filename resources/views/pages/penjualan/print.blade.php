@@ -222,6 +222,24 @@
                             </div>
                         </th>
                     </tr>
+                    <tr>
+                        <th colspan="3" class="number">Nominal Dibayar</th>
+                        <th>
+                            <div class="currency">
+                                <span>Rp</span>
+                                <span>{{ number_format($data->nominal_dibayar,0,',','.') }}</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="number">Nominal Belum Dibayar</th>
+                        <th>
+                            <div class="currency">
+                                <span>Rp</span>
+                                <span>{{ number_format($data->total_penjualan-$data->nominal_dibayar,0,',','.') }}</span>
+                            </div>
+                        </th>
+                    </tr>
                 </tfoot>
             </table>
             <div class="ttd">

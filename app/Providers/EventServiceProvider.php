@@ -115,7 +115,7 @@ class EventServiceProvider extends ServiceProvider
                 'text' => 'Penjualan',
                 'route' => 'penjualan.main',
                 'icon' => 'fas fa-receipt',
-                'active' => ['penjualan', 'penjualan/form*', 'regex:@^penjualan/form[0-9]+$@'],
+                'active' => ['penjualan', 'penjualan/form*', 'regex:@^penjualan/form[0-9]+$@', 'pembayaran-penjualan/*'],
                 'can' => 'penjualan-view'
             ]);
             $event->menu->add('Pengaturan');

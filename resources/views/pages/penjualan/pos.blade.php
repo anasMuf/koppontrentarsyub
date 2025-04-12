@@ -466,11 +466,11 @@
                 $('#change_amount').val(formatRupiah(changeAmount > 0 ? changeAmount : 0));
 
                 // Memeriksa apakah pembayaran cukup
-                if (amountPaid >= total) {
-                    $('#complete_sale').prop('disabled', false);
-                } else {
-                    $('#complete_sale').prop('disabled', true);
-                }
+                // if (amountPaid >= total) {
+                //     $('#complete_sale').prop('disabled', false);
+                // } else {
+                //     $('#complete_sale').prop('disabled', true);
+                // }
             }
 
             // Memicu perhitungan saat ada perubahan pada input

@@ -14,6 +14,7 @@ use App\Http\Controllers\KategoriProdukController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PendaftaranAnggotaController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PenjualanPembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +120,13 @@ Route::middleware('auth')->group(function(){
         Route::get('/pos', 'pos')->name('.pos');
         Route::get('/form', 'form')->name('.form');
         Route::get('/print', 'print')->name('.print');
+        Route::post('/store', 'store')->name('.store');
+        Route::delete('/delete/{id}', 'delete')->name('.delete');
+    });
+
+    Route::prefix('/pembayaran-penjualan/{penjualan:id_penjualan}')->as('pembayaran_penjualan')->controller(PenjualanPembayaranController::class)->group(function(){
+        Route::get('/', 'index')->name('.main');
+        Route::get('/form', 'form')->name('.form');
         Route::post('/store', 'store')->name('.store');
         Route::delete('/delete/{id}', 'delete')->name('.delete');
     });

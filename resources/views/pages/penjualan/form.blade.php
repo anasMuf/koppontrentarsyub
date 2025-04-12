@@ -85,6 +85,24 @@
                             </div>
                         </th>
                     </tr>
+                    <tr>
+                        <th colspan="3" class="number">Nominal Dibayar</th>
+                        <th>
+                            <div class="currency">
+                                <span>Rp</span>
+                                <span>{{ number_format($data->nominal_dibayar,0,',','.') }}</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="number">Nominal Belum Dibayar</th>
+                        <th>
+                            <div class="currency">
+                                <span>Rp</span>
+                                <span>{{ number_format($data->total_penjualan-$data->nominal_dibayar,0,',','.') }}</span>
+                            </div>
+                        </th>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -100,6 +118,7 @@
                 <a href="{{ route('penjualan.print',['id'=>$data->id_penjualan]) }}" target="_blank" class="btn btn-warning" id="btnPrint">
                     <i class="fas fa-print"></i> Print Struk
                 </a>
+                <a href="{{ route('pembayaran_penjualan.main',['penjualan'=>$data->id_penjualan]) }}" class="btn btn-primary" id="btnRiwayatPembayaran" title="lihat atau bayar sisa pembayaran">Riwayat Pembayaran</a>
             </div>
         </div>
     </x-slot>
@@ -111,6 +130,12 @@
 @push('css')
     {{-- Add here extra stylesheets --}}
     <link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
+    <style>
+        .currency {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 @endpush
 
 {{-- Push extra scripts --}}
